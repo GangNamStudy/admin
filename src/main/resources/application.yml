@@ -14,8 +14,8 @@ spring-doc:
   default-consumes-media-type: application/json
   default-produces-media-type: application/json
 
-  security:
-    whitelist:
-      - /swagger-ui/**
-      - /v3/api-docs/**
-      - /swagger-ui.html
+security:
+  whitelist:
+    /swagger-ui/**,
+    /v3/api-docs/**,
+    /swagger-ui.html

@@ -14,11 +14,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(auth -> auth
+
+         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers(whitelist).permitAll() // yml에서 가져온 경로들을 인증 없이 허용
                         .anyRequest().authenticated() // 나머지는 인증 필요
-                )
-                .build();
+                );
+
+         return http.build();
     }
 }
