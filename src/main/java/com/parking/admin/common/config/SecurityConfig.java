@@ -15,9 +15,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers(whitelist).permitAll() // yml에서 가져온 경로들을 인증 없이 허용
-                        .anyRequest().authenticated() // 나머지는 인증 필요
+        http
+                .csrf(csrf -> csrf.disable())  // CSRF 보호 비활성화
+                .cors(cors -> cors.disable())  // CORS 비활성화 (필요시)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(whitelist).permitAll()
+                        .anyRequest().authenticated()
                 );
 
          return http.build();
