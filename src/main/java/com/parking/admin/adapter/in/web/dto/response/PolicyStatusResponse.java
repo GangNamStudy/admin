@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PolicyStatusResponse {
-    private Long id;
-    private PolicyStatus policyStatus;
+    private final Long id;
+    private final PolicyStatus policyStatus;
 }

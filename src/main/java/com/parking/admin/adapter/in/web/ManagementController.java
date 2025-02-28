@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/admin/management")
 public class ManagementController {
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<ParkingManagementListResponse> readParkingHistory() {
         throw new UnsupportedOperationException();}
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/admin/policy")
 public class PolicyController {
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<PolicyResponse> createPolicy(@RequestBody CreatePolicyRequest dto) {
         throw new UnsupportedOperationException(); }
 

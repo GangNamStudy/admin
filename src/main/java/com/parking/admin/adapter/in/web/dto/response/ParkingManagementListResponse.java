@@ -8,5 +8,5 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class ParkingManagementListResponse {
-    private List<ParkingManagementResponse> columns;
+    private List<ParkingManagementResponse> results;
 }
