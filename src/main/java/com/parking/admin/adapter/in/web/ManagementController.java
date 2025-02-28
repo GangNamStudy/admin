@@ -19,7 +19,7 @@ public class ManagementController {
     @PostMapping("/entrance")
     public ResponseEntity<EntryResponse> entrance(@RequestBody EntryAndExitRequest dto) {throw new UnsupportedOperationException();}
 
-    @PatchMapping("/{parking-id}/departure}")
+    @PatchMapping("/{parking-id}/departure")
     public String departure(@PathVariable("parking-id") String parkingId, @RequestBody EntryAndExitRequest dto) {
         throw new UnsupportedOperationException();}
 }
