@@ -31,6 +31,7 @@
 - **예제 응답**:
   ```json
   {
+    "id": 123,
     "policy_name": "기본 요금 정책",
     "base_fee": 1000,
     "fee_time": 30,
@@ -143,14 +144,14 @@
 
 ### **2.2 차량 입차** (POST)
 
-- **URL**: `/api/admin/entrance`
+- **URL**: `/api/admin/management/entrance`
 - **Body Parameters**:
   - `car_id` (string): 차량 번호
   - `entry_time` (optional, string): 입차 시간 (ISO 8601 형식, 기본값: 현재시간)
 - **설명**: 차량을 입차시키고 기록을 생성합니다.
 - **예제 cURL 요청**:
   ```bash
-  curl -X POST "http://localhost:8080/api/admin/entrance" \
+  curl -X POST "http://localhost:8080/api/admin/management/entrance" \
   -H "Content-Type: application/json" \
   -d '{"car_id": "89거 9821", "entry_time": "2025-11-08T11:44:30"}'
   ```
@@ -165,14 +166,14 @@
 
 ### **2.3 차량 출차** (PATCH)
 
-- **URL**: `/api/admin/{parking-id}/departure`
+- **URL**: `/api/admin/management/{parking-id}/departure`
 - **Body Parameters**:
   - `car_id` (string): 차량 번호
   - `exit_time` (optional, string): 출차 시간 (ISO 8601 형식, 기본값: 현재시간)
 - **설명**: 차량을 출차시키고 해당 차량의 기록을 수정합니다.
 - **예제 cURL 요청**:
   ```bash
-  curl -X PATCH "http://localhost:8080/api/admin/123/departure" \
+  curl -X PATCH "http://localhost:8080/api/admin/management/123/departure" \
   -H "Content-Type: application/json" \
   -d '{"car_id": "89거 9821", "exit_time": "2025-11-08T14:44:30"}'
   ```
@@ -180,7 +181,8 @@
   ```json
   {
     "car_id": "89거 9821",
-    "exit_time": "2025-11-08T14:44:30",
+    "entry_time": "2025-11-08T14:44:30",
+    "exit_time": "2025-11-08T14:44:31",
     "car_status": "exit"
   }
   ```
