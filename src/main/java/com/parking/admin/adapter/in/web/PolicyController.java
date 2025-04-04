@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class PolicyController {
 
     @PostMapping
-    public ResponseEntity<PolicyResponse> createPolicy(@RequestBody UpdatePolicyRequest dto) {
+    public ResponseEntity<PolicyResponse> updatePolicy(@RequestBody UpdatePolicyRequest dto) {
         throw new UnsupportedOperationException(); }
 
     @GetMapping("/check-all")
