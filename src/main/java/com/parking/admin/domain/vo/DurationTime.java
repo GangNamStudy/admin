@@ -7,10 +7,10 @@ import lombok.Getter;
  * 기간(30분, 1시간) 을 의미하는 VO
 **/
 @Getter
-public final class Duration {
+public final class DurationTime {
     private final Long duration;
 
-    public Duration(Long duration){
+    public DurationTime(Long duration){
         if (duration < 0) throw new IllegalArgumentException("시간(분)은 음수일 수 없습니다.");
         this.duration = duration;
     }

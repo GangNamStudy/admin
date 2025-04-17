@@ -2,16 +2,16 @@ package com.parking.admin.domain.entity;
 
 import com.parking.admin.application.command.CreatePolicyCommand;
 import com.parking.admin.application.command.UpdatePolicyCommand;
-import com.parking.admin.domain.vo.Duration;
+import com.parking.admin.domain.vo.DurationTime;
 import com.parking.admin.domain.vo.Money;
 import lombok.Getter;
 
 @Getter
 public class Policy {
     private Money baseFee;
-    private Duration freeTime;
+    private DurationTime freeTime;
     private Money additionalFee;
-    private Duration additionalTime;
+    private DurationTime additionalTime;
 
     public Policy(CreatePolicyCommand command) {
         command.validate();
@@ -19,7 +19,6 @@ public class Policy {
         this.freeTime = command.getFreeTime();
         this.additionalFee = command.getAdditionalFee();
         this.additionalTime = command.getAdditionalTime();
-
     }
 
     public void change(UpdatePolicyCommand command) {

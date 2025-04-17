@@ -1,19 +1,20 @@
 package com.parking.admin.application.command;
 
-import com.parking.admin.domain.vo.Duration;
+import com.parking.admin.domain.vo.DurationTime;
 import com.parking.admin.domain.vo.Money;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UpdatePolicyCommand {
     private Money baseFee;
-    private Duration freeTime;
+    private DurationTime freeTime;
     private Money additionalFee;
-    private Duration additionalTime;
+    private DurationTime additionalTime;
 
     public boolean hasBaseFee() {
         return baseFee != null;
