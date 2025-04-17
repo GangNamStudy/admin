@@ -14,7 +14,6 @@ public class Policy {
     private DurationTime additionalTime;
 
     public Policy(CreatePolicyCommand command) {
-        command.validate();
         this.baseFee = command.getBaseFee();
         this.freeTime = command.getFreeTime();
         this.additionalFee = command.getAdditionalFee();
