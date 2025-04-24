@@ -1,12 +1,15 @@
 package com.parking.admin.domain.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public final class Money {
     private final Long amount;
+
+    public Money(Long amount){
+        if (amount < 0) throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+        this.amount = amount;
+    }
 
     @Override
     public boolean equals(Object o) {

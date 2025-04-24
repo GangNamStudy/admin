@@ -1,6 +1,7 @@
 package com.parking.admin.domain.vo;
 
 import lombok.Getter;
+
 import java.util.UUID;
 
 @Getter

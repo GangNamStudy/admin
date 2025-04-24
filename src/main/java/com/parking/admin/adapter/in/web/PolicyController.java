@@ -1,7 +1,7 @@
 package com.parking.admin.adapter.in.web;
 
-import com.parking.admin.adapter.in.web.dto.request.CreatePolicyRequest;
 import com.parking.admin.adapter.in.web.dto.request.PolicyStatusRequest;
+import com.parking.admin.adapter.in.web.dto.request.UpdatePolicyRequest;
 import com.parking.admin.adapter.in.web.dto.response.PolicyListResponse;
 import com.parking.admin.adapter.in.web.dto.response.PolicyResponse;
 import com.parking.admin.adapter.in.web.dto.response.PolicyStatusResponse;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/admin/policy")
 public class PolicyController {
 
-    @PostMapping
-    public ResponseEntity<PolicyResponse> createPolicy(@RequestBody CreatePolicyRequest dto) {
+    @PatchMapping
+    public ResponseEntity<PolicyResponse> updatePolicy(@RequestBody UpdatePolicyRequest dto) {
         throw new UnsupportedOperationException(); }
 
     @GetMapping("/check-all")
