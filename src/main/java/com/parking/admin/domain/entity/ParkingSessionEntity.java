@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class ParkingSessionEntity {
-    private EntityId id;
+    private final EntityId id;
     private final String plate;
     private final LocalDateTime entryTime;
     private LocalDateTime exitTime;
