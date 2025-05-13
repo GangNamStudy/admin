@@ -1,6 +1,7 @@
 package com.parking.admin.entity;
 
 import com.parking.admin.application.command.CreatePolicyCommand;
+import com.parking.admin.application.command.UpdatePolicyCommand;
 import com.parking.admin.application.mapper.PolicyMapper;
 import com.parking.admin.domain.entity.PolicyEntity;
 import com.parking.admin.domain.vo.DurationTime;
@@ -52,10 +53,12 @@ class PolicyEntityTest {
                 .build();
 
         PolicyEntity policy = policyMapper.toEntity(command);
-        Money newBaseFee = Money.of(2000L);
+        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
+                .baseFee(2000L)
+                .build();
 
         // when
-        policy.changeBaseFee(newBaseFee);
+        policyMapper.change(updateCommand, policy);
 
         // then
         assertEquals(2000L, policy.getBaseFee().getAmount());
@@ -73,10 +76,12 @@ class PolicyEntityTest {
                 .build();
 
         PolicyEntity policy = policyMapper.toEntity(command);
-        DurationTime newFreeTime = DurationTime.of(60L);
+        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
+                .freeTime(60L)
+                .build();
 
         // when
-        policy.changeFreeTime(newFreeTime);
+        policyMapper.change(updateCommand, policy);
 
         // then
         assertEquals(60L, policy.getFreeTime().getDuration());
@@ -94,10 +99,12 @@ class PolicyEntityTest {
                 .build();
 
         PolicyEntity policy = policyMapper.toEntity(command);
-        Money newAdditionalFee = Money.of(1000L);
+        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
+                .additionalFee(1000L)
+                .build();
 
         // when
-        policy.changeAdditionalFee(newAdditionalFee);
+        policyMapper.change(updateCommand, policy);
 
         // then
         assertEquals(1000L, policy.getAdditionalFee().getAmount());
@@ -115,10 +122,12 @@ class PolicyEntityTest {
                 .build();
 
         PolicyEntity policy = policyMapper.toEntity(command);
-        DurationTime newAdditionalTime = DurationTime.of(20L);
+        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
+                .additionalTime(20L)
+                .build();
 
         // when
-        policy.changeAdditionalTime(newAdditionalTime);
+        policyMapper.change(updateCommand, policy);
 
         // then
         assertEquals(20L, policy.getAdditionalTime().getDuration());
@@ -152,9 +161,11 @@ class PolicyEntityTest {
                 .build();
 
         PolicyEntity policy = policyMapper.toEntity(command);
-        DurationTime newAdditionalTime = DurationTime.of(0L);
+        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
+                .additionalTime(0L)
+                .build();
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> policy.changeAdditionalTime(newAdditionalTime));
+        assertThrows(IllegalArgumentException.class, () -> policyMapper.change(updateCommand, policy));
     }
 }
