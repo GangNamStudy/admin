@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Getter
 public class ParkingSessionEntity {
     private EntityId id;
-    private String plate;
-    private LocalDateTime entryTime;
+    private final String plate;
+    private final LocalDateTime entryTime;
     private LocalDateTime exitTime;
     private boolean isParked;
 
