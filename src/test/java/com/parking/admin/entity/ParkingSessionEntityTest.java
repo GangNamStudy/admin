@@ -1,32 +1,37 @@
 package com.parking.admin.entity;
 
 import com.parking.admin.application.command.CreateParkingSessionCommand;
-import com.parking.admin.domain.entity.ParkingSession;
-import com.parking.admin.domain.vo.EntityId;
-import com.parking.admin.domain.vo.Time;
+import com.parking.admin.application.mapper.ParkingSessionMapper;
+import com.parking.admin.domain.entity.ParkingSessionEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class ParkingSessionTest {
+class ParkingSessionEntityTest {
+
+    @Autowired
+    ParkingSessionMapper mapper;
 
     @Test
     @DisplayName("주차된 차량의 세션을 생성할 수 있다")
     void createParkedSession() {
         // Given
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
-                .entryTime(Time.now())
+                .entryTime(LocalDateTime.now())
                 .exitTime(null)
                 .isParked(true)
                 .build();
 
         // When
-        ParkingSession session = new ParkingSession(command);
+        ParkingSessionEntity session = mapper.toEntity(command);
 
         // Then
         assertTrue(session.isParked());
@@ -37,9 +42,9 @@ public class ParkingSessionTest {
     @DisplayName("출차된 차량의 세션을 생성할 수 있다")
     void createExitedSession() {
         // Given
-        Time now = Time.now();
+        LocalDateTime now = LocalDateTime.now();
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
                 .entryTime(now)
                 .exitTime(now)
@@ -47,7 +52,7 @@ public class ParkingSessionTest {
                 .build();
 
         // When
-        ParkingSession session = new ParkingSession(command);
+        ParkingSessionEntity session = mapper.toEntity(command);
 
         // Then
         assertFalse(session.isParked());
@@ -59,15 +64,15 @@ public class ParkingSessionTest {
     void validateParkedStateHasNoExitTime() {
         // Given
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
-                .entryTime(Time.now())
-                .exitTime(Time.now())
+                .entryTime(LocalDateTime.now())
+                .exitTime(LocalDateTime.now())
                 .isParked(true)
                 .build();
 
         // When & Then
-        assertThrows(IllegalStateException.class, () -> new ParkingSession(command));
+        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
     }
 
     @Test
@@ -75,15 +80,15 @@ public class ParkingSessionTest {
     void validateExitedStateHasExitTime() {
         // Given
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
-                .entryTime(Time.now())
+                .entryTime(LocalDateTime.now())
                 .exitTime(null)
                 .isParked(false)
                 .build();
 
         // When & Then
-        assertThrows(IllegalStateException.class, () -> new ParkingSession(command));
+        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
     }
 
     @Test
@@ -91,13 +96,13 @@ public class ParkingSessionTest {
     void exitParkedCar() {
         // Given
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
-                .entryTime(Time.now())
+                .entryTime(LocalDateTime.now())
                 .exitTime(null)
                 .isParked(true)
                 .build();
-        ParkingSession session = new ParkingSession(command);
+        ParkingSessionEntity session = mapper.toEntity(command);
 
         // When
         session.exitCar();
@@ -111,17 +116,35 @@ public class ParkingSessionTest {
     @DisplayName("출차된 차량은 출차할 수 없다")
     void cannotExitAlreadyExitedCar() {
         // Given
-        Time now = Time.now();
+        LocalDateTime now = LocalDateTime.now();
         CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(EntityId.of(1L))
+                .id(1L)
                 .plate("ABC123")
                 .entryTime(now)
                 .exitTime(now)
                 .isParked(false)
                 .build();
-        ParkingSession session = new ParkingSession(command);
+        ParkingSessionEntity session = mapper.toEntity(command);
 
         // When & Then
         assertThrows(IllegalStateException.class, session::exitCar);
+    }
+
+
+    @Test
+    @DisplayName("입차 시간은 출차 시간보다 빨라야 한다")
+    void entryTimeMustBeBeforeExitTime() {
+        // Given
+        LocalDateTime earlyExit = LocalDateTime.now();
+        CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
+                .id(1L)
+                .plate("ABC123")
+                .entryTime(LocalDateTime.now())
+                .exitTime(earlyExit)
+                .isParked(false)
+                .build();
+
+        // When & Then
+        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
     }
 }
