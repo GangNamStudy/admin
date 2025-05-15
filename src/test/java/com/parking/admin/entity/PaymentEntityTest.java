@@ -43,6 +43,7 @@ class PaymentEntityTest {
         assertThat(entity.getAmount()).isEqualTo(Money.of(command.getAmount()));
         assertThat(entity.getPaymentDate()).isEqualTo(command.getPaymentDate());
         assertThat(entity.getStatus()).isEqualTo(PaymentStatus.of(command.getStatus()));
+        assertThat(entity.getStatus().getDisplayName()).isEqualTo("결제 성공");
         assertThat(entity.getOrderName()).isEqualTo(command.getOrderName());
         assertThat(entity.getPaymentMethod()).isEqualTo(command.getPaymentMethod());
         assertThat(entity.getReceiptUrl()).isEqualTo(command.getReceiptUrl());
