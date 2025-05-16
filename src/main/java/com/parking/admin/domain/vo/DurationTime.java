@@ -10,8 +10,12 @@ import lombok.Getter;
 public final class DurationTime {
     private final Long duration;
 
-    public DurationTime(Long duration){
+    private DurationTime(Long duration){
         if (duration < 0) throw new IllegalArgumentException("시간(분)은 음수일 수 없습니다.");
         this.duration = duration;
+    }
+
+    public static DurationTime of(Long duration){
+        return new DurationTime(duration);
     }
 }
