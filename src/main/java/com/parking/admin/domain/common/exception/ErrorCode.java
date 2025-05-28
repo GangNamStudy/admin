@@ -1,11 +1,14 @@
 package com.parking.admin.domain.common.exception;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorCode {
 
     /**
      * 비즈니스 로직 예외
      */
-    // 상태 관련
+    // 결제상태 관련
     NULL_STATUS("상태 값은 null일 수 없습니다."),
     UNREGISTERED_PAYMENT_STATUS("등록되지 않은 결제 상태입니다 {status: %s}"),
 
@@ -22,15 +25,10 @@ public enum ErrorCode {
     // Money 클래스
     NEGATIVE_AMOUNT("금액은 음수일 수 없습니다.");
 
-
     private final String message;
 
     ErrorCode(String message) {
         this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     /**
