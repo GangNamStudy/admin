@@ -1,6 +1,6 @@
 package com.parking.admin.vo;
 
-import com.parking.admin.domain.vo.Money;
+import com.parking.admin.domain.common.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

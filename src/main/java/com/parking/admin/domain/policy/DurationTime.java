@@ -1,5 +1,7 @@
-package com.parking.admin.domain.vo;
+package com.parking.admin.domain.policy;
 
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 /**
@@ -11,7 +13,7 @@ public final class DurationTime {
     private final Long duration;
 
     private DurationTime(Long duration){
-        if (duration < 0) throw new IllegalArgumentException("시간(분)은 음수일 수 없습니다.");
+        if (duration < 0) throw new BusinessLogicException(ErrorCode.NEGATIVE_DURATION);
         this.duration = duration;
     }
 

@@ -1,7 +1,8 @@
-package com.parking.admin.domain.entity;
+package com.parking.admin.domain.policy;
 
-import com.parking.admin.domain.vo.DurationTime;
-import com.parking.admin.domain.vo.Money;
+import com.parking.admin.domain.common.Money;
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
@@ -42,6 +43,6 @@ public class PolicyEntity {
 
     private void validateAdditionalTime(){
         if(this.additionalTime.getDuration() < 1L)
-            throw new IllegalArgumentException("추가 요금 시간은 1분 이상이어야 합니다");
+            throw new BusinessLogicException(ErrorCode.ADDITIONAL_TIME_TOO_SHORT);
     }
 }

@@ -1,6 +1,6 @@
 package com.parking.admin.vo;
 
-import com.parking.admin.domain.vo.DurationTime;
+import com.parking.admin.domain.policy.DurationTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

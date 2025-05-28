@@ -3,7 +3,7 @@ package com.parking.admin.entity;
 import com.parking.admin.application.command.CreatePolicyCommand;
 import com.parking.admin.application.command.UpdatePolicyCommand;
 import com.parking.admin.application.mapper.PolicyMapper;
-import com.parking.admin.domain.entity.PolicyEntity;
+import com.parking.admin.domain.policy.PolicyEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

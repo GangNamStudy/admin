@@ -2,7 +2,7 @@ package com.parking.admin.entity;
 
 import com.parking.admin.application.command.CreateParkingSessionCommand;
 import com.parking.admin.application.mapper.ParkingSessionMapper;
-import com.parking.admin.domain.entity.ParkingSessionEntity;
+import com.parking.admin.domain.parking.ParkingSessionEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,9 @@ package com.parking.admin.application.mapper;
 
 import com.parking.admin.application.command.CreatePolicyCommand;
 import com.parking.admin.application.command.UpdatePolicyCommand;
-import com.parking.admin.domain.entity.PolicyEntity;
-import com.parking.admin.domain.vo.DurationTime;
-import com.parking.admin.domain.vo.Money;
+import com.parking.admin.domain.common.Money;
+import com.parking.admin.domain.policy.DurationTime;
+import com.parking.admin.domain.policy.PolicyEntity;
 import org.springframework.stereotype.Component;
 
 @Component

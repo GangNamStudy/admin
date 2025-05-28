@@ -1,4 +1,4 @@
-package com.parking.admin.domain.vo;
+package com.parking.admin.domain.common;
 
 import lombok.Getter;
 

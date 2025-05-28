@@ -1,8 +1,8 @@
 package com.parking.admin.application.mapper;
 
 import com.parking.admin.application.command.CreateParkingSessionCommand;
-import com.parking.admin.domain.entity.ParkingSessionEntity;
-import com.parking.admin.domain.vo.EntityId;
+import com.parking.admin.domain.common.EntityId;
+import com.parking.admin.domain.parking.ParkingSessionEntity;
 import org.springframework.stereotype.Component;
 
 @Component

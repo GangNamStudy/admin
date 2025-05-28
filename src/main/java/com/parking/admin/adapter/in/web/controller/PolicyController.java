@@ -1,4 +1,4 @@
-package com.parking.admin.adapter.in.web;
+package com.parking.admin.adapter.in.web.controller;
 
 import com.parking.admin.adapter.in.web.dto.request.PolicyStatusRequest;
 import com.parking.admin.adapter.in.web.dto.request.UpdatePolicyRequest;
