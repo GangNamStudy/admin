@@ -1,8 +1,7 @@
-package com.parking.admin.domain.entity;
+package com.parking.admin.domain.payment;
 
-import com.parking.admin.domain.vo.EntityId;
-import com.parking.admin.domain.vo.Money;
-import com.parking.admin.domain.vo.PaymentStatus;
+import com.parking.admin.domain.common.EntityId;
+import com.parking.admin.domain.common.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

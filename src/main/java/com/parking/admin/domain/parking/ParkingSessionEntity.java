@@ -1,6 +1,8 @@
-package com.parking.admin.domain.entity;
+package com.parking.admin.domain.parking;
 
-import com.parking.admin.domain.vo.EntityId;
+import com.parking.admin.domain.common.EntityId;
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -31,35 +33,19 @@ public class ParkingSessionEntity {
 
     private void validateExit(){
         if (!this.isParked) {
-            throw new IllegalStateException("주차되지 않은 차량은 내보낼 수 없습니다.");
+            throw new BusinessLogicException(ErrorCode.CANNOT_EXIT_UNPARKED_CAR);
         }
     }
 
     private void validate(){
-        if (this.isParked()) {
-            validateParkedStateHasNoExitTime();
-        }
-        else {
-            validateExitedStateHasExitTime();
+        if (!this.isParked()) {
             validateTime();
         }
     }
 
     private void validateTime(){
         if (this.entryTime.isAfter(this.exitTime)) {
-            throw new IllegalStateException("출차 시간이 입차시간보다 빠릅니다.");
-        }
-    }
-
-    private void validateParkedStateHasNoExitTime() {
-        if (this.exitTime != null) {
-            throw new IllegalStateException("차량이 주차되어 있는데 출차 시각이 기록되어 있습니다.");
-        }
-    }
-
-    private void validateExitedStateHasExitTime() {
-        if (this.exitTime == null) {
-            throw new IllegalStateException("차량이 출차했는데 출차 시각이 기록되어 있지 않습니다");
+            throw new BusinessLogicException(ErrorCode.EXIT_BEFORE_ENTRY);
         }
     }
 }

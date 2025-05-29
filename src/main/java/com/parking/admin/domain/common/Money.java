@@ -1,5 +1,7 @@
-package com.parking.admin.domain.vo;
+package com.parking.admin.domain.common;
 
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
@@ -7,7 +9,7 @@ public final class Money {
     private final Long amount;
 
     private Money(Long amount){
-        if (amount < 0) throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+        if (amount < 0) throw new BusinessLogicException(ErrorCode.NEGATIVE_AMOUNT);
         this.amount = amount;
     }
 

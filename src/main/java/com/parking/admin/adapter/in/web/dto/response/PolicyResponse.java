@@ -1,6 +1,5 @@
 package com.parking.admin.adapter.in.web.dto.response;
 
-import com.parking.admin.domain.vo.PolicyStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,5 +12,4 @@ public class PolicyResponse {
     private Long feeTime;
     private Long additionalFee;
     private Long additionalTime;
-    private PolicyStatus policyStatus;
 }

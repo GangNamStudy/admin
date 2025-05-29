@@ -1,4 +1,7 @@
-package com.parking.admin.domain.vo;
+package com.parking.admin.domain.payment;
+
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.common.exception.ErrorCode;
 
 public enum PaymentStatus {
     PENDING,
@@ -10,7 +13,7 @@ public enum PaymentStatus {
 
     public static PaymentStatus of(String status) {
         if (status == null) {
-            throw new IllegalArgumentException("상태 값은 null일 수 없습니다.");
+            throw new BusinessLogicException(ErrorCode.NULL_STATUS);
         }
 
         return switch (status) {
@@ -20,7 +23,7 @@ public enum PaymentStatus {
             case "FAILED" -> FAILED;
             case "PARTIALLY_CANCELED" -> PARTIALLY_CANCELED;
             case "CANCELED" -> CANCELED;
-            default -> throw new IllegalArgumentException("등록되지 않은 결제 상태입니다 {status: " + status + "}");
+            default -> throw new BusinessLogicException(ErrorCode.UNREGISTERED_PAYMENT_STATUS, status);
         };
     }
 
