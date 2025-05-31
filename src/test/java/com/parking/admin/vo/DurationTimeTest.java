@@ -1,5 +1,6 @@
 package com.parking.admin.vo;
 
+import com.parking.admin.domain.common.exception.BusinessLogicException;
 import com.parking.admin.domain.policy.DurationTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class DurationTimeTest {
         Long negativeDuration = -1L;
 
         // when & then
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(BusinessLogicException.class,
                 () -> DurationTime.of(negativeDuration));
     }
 }

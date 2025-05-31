@@ -1,8 +1,8 @@
 package com.parking.admin.domain.parking;
 
 import com.parking.admin.domain.common.EntityId;
+import com.parking.admin.domain.common.exception.BusinessErrorCode;
 import com.parking.admin.domain.common.exception.BusinessLogicException;
-import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -33,7 +33,7 @@ public class ParkingSessionEntity {
 
     private void validateExit(){
         if (!this.isParked) {
-            throw new BusinessLogicException(ErrorCode.CANNOT_EXIT_UNPARKED_CAR);
+            throw new BusinessLogicException(BusinessErrorCode.CANNOT_EXIT_UNPARKED_CAR);
         }
     }
 
@@ -45,7 +45,7 @@ public class ParkingSessionEntity {
 
     private void validateTime(){
         if (this.entryTime.isAfter(this.exitTime)) {
-            throw new BusinessLogicException(ErrorCode.EXIT_BEFORE_ENTRY);
+            throw new BusinessLogicException(BusinessErrorCode.EXIT_BEFORE_ENTRY);
         }
     }
 }

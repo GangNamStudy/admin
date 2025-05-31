@@ -1,8 +1,8 @@
 package com.parking.admin.adapter.in.web;
 
+import com.parking.admin.adapter.exception.InfraException;
 import com.parking.admin.adapter.in.web.dto.response.ErrorResponseDTO;
 import com.parking.admin.domain.common.exception.BusinessLogicException;
-import com.parking.admin.domain.common.exception.InfraException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InfraException.class)
-    public ResponseEntity<ErrorResponseDTO> handleInfraException(InfraException e){
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDTO(e.getMessage()));
+    public ResponseEntity<ErrorResponseDTO> handleInfraException(){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDTO("서버 오류"));
     }
 }

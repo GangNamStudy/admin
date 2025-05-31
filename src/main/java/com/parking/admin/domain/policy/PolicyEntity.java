@@ -1,8 +1,8 @@
 package com.parking.admin.domain.policy;
 
 import com.parking.admin.domain.common.Money;
+import com.parking.admin.domain.common.exception.BusinessErrorCode;
 import com.parking.admin.domain.common.exception.BusinessLogicException;
-import com.parking.admin.domain.common.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
@@ -18,6 +18,15 @@ public class PolicyEntity {
         this.additionalFee = additionalFee;
         this.additionalTime = additionalTime;
         validate();
+    }
+
+    public PolicyInfo toInfo(){
+        return new PolicyInfo(
+                this.baseFee,
+                this.freeTime,
+                this.additionalFee,
+                this.additionalTime
+        );
     }
 
     public void changeBaseFee(Money baseFee) {
@@ -43,6 +52,6 @@ public class PolicyEntity {
 
     private void validateAdditionalTime(){
         if(this.additionalTime.getDuration() < 1L)
-            throw new BusinessLogicException(ErrorCode.ADDITIONAL_TIME_TOO_SHORT);
+            throw new BusinessLogicException(BusinessErrorCode.ADDITIONAL_TIME_TOO_SHORT);
     }
 }

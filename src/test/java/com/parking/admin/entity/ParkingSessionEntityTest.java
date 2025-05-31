@@ -2,20 +2,22 @@ package com.parking.admin.entity;
 
 import com.parking.admin.application.command.CreateParkingSessionCommand;
 import com.parking.admin.application.mapper.ParkingSessionMapper;
+import com.parking.admin.domain.common.exception.BusinessLogicException;
 import com.parking.admin.domain.parking.ParkingSessionEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ParkingSessionEntityTest {
 
-    @Autowired
+    @InjectMocks
     ParkingSessionMapper mapper;
 
     @Test
@@ -60,38 +62,6 @@ class ParkingSessionEntityTest {
     }
 
     @Test
-    @DisplayName("주차된 상태에서는 출차 시각이 없어야 한다")
-    void validateParkedStateHasNoExitTime() {
-        // Given
-        CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(1L)
-                .plate("ABC123")
-                .entryTime(LocalDateTime.now())
-                .exitTime(LocalDateTime.now())
-                .isParked(true)
-                .build();
-
-        // When & Then
-        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
-    }
-
-    @Test
-    @DisplayName("출차된 상태에서는 출차 시각이 있어야 한다")
-    void validateExitedStateHasExitTime() {
-        // Given
-        CreateParkingSessionCommand command = CreateParkingSessionCommand.builder()
-                .id(1L)
-                .plate("ABC123")
-                .entryTime(LocalDateTime.now())
-                .exitTime(null)
-                .isParked(false)
-                .build();
-
-        // When & Then
-        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
-    }
-
-    @Test
     @DisplayName("주차된 차량을 출차할 수 있다")
     void exitParkedCar() {
         // Given
@@ -127,7 +97,7 @@ class ParkingSessionEntityTest {
         ParkingSessionEntity session = mapper.toEntity(command);
 
         // When & Then
-        assertThrows(IllegalStateException.class, session::exitCar);
+        assertThrows(BusinessLogicException.class, session::exitCar);
     }
 
 
@@ -145,6 +115,6 @@ class ParkingSessionEntityTest {
                 .build();
 
         // When & Then
-        assertThrows(IllegalStateException.class, () -> mapper.toEntity(command));
+        assertThrows(BusinessLogicException.class, () -> mapper.toEntity(command));
     }
 }

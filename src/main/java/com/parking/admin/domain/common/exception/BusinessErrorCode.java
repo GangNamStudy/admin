@@ -3,7 +3,7 @@ package com.parking.admin.domain.common.exception;
 import lombok.Getter;
 
 @Getter
-public enum ErrorCode {
+public enum BusinessErrorCode {
 
     /**
      * 비즈니스 로직 예외
@@ -27,7 +27,7 @@ public enum ErrorCode {
 
     private final String message;
 
-    ErrorCode(String message) {
+    BusinessErrorCode(String message) {
         this.message = message;
     }
 

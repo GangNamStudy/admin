@@ -1,6 +1,7 @@
 package com.parking.admin.vo;
 
 import com.parking.admin.domain.common.Money;
+import com.parking.admin.domain.common.exception.BusinessLogicException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ class MoneyTest {
         long negativeAmount = -1000L;
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> Money.of(negativeAmount));
+        assertThrows(BusinessLogicException.class, () -> Money.of(negativeAmount));
     }
 
     @Test

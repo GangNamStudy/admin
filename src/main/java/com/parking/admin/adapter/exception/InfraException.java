@@ -1,4 +1,4 @@
-package com.parking.admin.domain.common.exception;
+package com.parking.admin.adapter.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,5 +6,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class InfraException extends RuntimeException {
-    private final ErrorCode errorCode;
+    private final InfraErrorCode errorCode;
 }
