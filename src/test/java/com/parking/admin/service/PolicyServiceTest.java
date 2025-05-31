@@ -29,7 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
                         "api.base-url=http://localhost:${wiremock.server.port}"}
         )
 public class PolicyServiceTest {
-    //TODO: 시큐리티 필터 끼고도 작동하도록 수정해야됨. 아니 일단 시큐리티가 필요한지 부터 고민해볼것.
 
     @Autowired
     PolicyUseCase policyUseCase;
@@ -49,7 +48,7 @@ public class PolicyServiceTest {
 
     @Test
     @DisplayName("가격 정책 업데이트 서비스 테스트")
-    void UpdatePolicyTest() throws Exception{
+    void UpdatePolicyTest() {
         // given: WireMock으로 외부 API의 예상 응답 설정
         String currentPolicyJson =
                 "{\"baseFee\": 1000,\"freeTime\": 30, \"additionalFee\": 500,\"additionalTime\": 10}";

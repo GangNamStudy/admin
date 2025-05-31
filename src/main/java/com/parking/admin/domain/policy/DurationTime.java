@@ -9,8 +9,8 @@ import lombok.Value;
  * 기간(30분, 1시간) 을 의미하는 VO
 **/
 @Value
-public final class DurationTime {
-    private final Long duration;
+public class DurationTime {
+    Long duration;
 
     private DurationTime(Long duration){
         if (duration < 0) throw new BusinessLogicException(BusinessErrorCode.NEGATIVE_DURATION);

@@ -5,8 +5,8 @@ import com.parking.admin.domain.common.exception.BusinessLogicException;
 import lombok.Value;
 
 @Value
-public final class Money {
-    private final Long amount;
+public class Money {
+    Long amount;
 
     private Money(Long amount){
         if (amount < 0) throw new BusinessLogicException(BusinessErrorCode.NEGATIVE_AMOUNT);

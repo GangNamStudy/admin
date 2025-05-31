@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InfraException.class)
-    public ResponseEntity<ErrorResponseDTO> handleInfraException(InfraException e){
+    public ResponseEntity<ErrorResponseDTO> handleInfraException(){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDTO("서버 오류"));
     }
 }

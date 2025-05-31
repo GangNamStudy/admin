@@ -5,9 +5,9 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public final class EntityId {
-    private final String value;
-    private final IdType originalType;
+public class EntityId {
+    String value;
+    IdType originalType;
 
     private EntityId(String value, IdType originalType) {
         this.value = value;
