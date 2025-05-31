@@ -1,11 +1,11 @@
-package com.parking.admin.adapter.in.web.dto.response;
+package com.parking.admin.adapter.out.item.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PolicyResponse {
+public class ExternalUpdatePolicyRequest {
     private Long baseFee;
     private Long freeTime;
     private Long additionalFee;

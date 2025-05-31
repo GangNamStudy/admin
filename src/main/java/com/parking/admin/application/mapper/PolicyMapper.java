@@ -1,34 +1,23 @@
 package com.parking.admin.application.mapper;
 
-import com.parking.admin.application.command.CreatePolicyCommand;
-import com.parking.admin.application.command.UpdatePolicyCommand;
-import com.parking.admin.domain.common.Money;
-import com.parking.admin.domain.policy.DurationTime;
+import com.parking.admin.application.port.in.PolicyUseCase;
 import com.parking.admin.domain.policy.PolicyEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PolicyMapper {
-    public PolicyEntity toEntity(CreatePolicyCommand command){
-        return new PolicyEntity(
-                Money.of(command.getBaseFee()),
-                DurationTime.of(command.getFreeTime()),
-                Money.of(command.getAdditionalFee()),
-                DurationTime.of(command.getAdditionalTime())
-        );
-    }
 
-    public void change(UpdatePolicyCommand command, PolicyEntity entity){
+    public void change(PolicyUseCase.UpdatePolicyCommand command, PolicyEntity entity){
         if (command.getBaseFee() != null)
-            entity.changeBaseFee(Money.of(command.getBaseFee()));
+            entity.changeBaseFee(command.getBaseFee());
 
         if (command.getFreeTime() != null)
-            entity.changeFreeTime(DurationTime.of(command.getFreeTime()));
+            entity.changeFreeTime(command.getFreeTime());
 
         if (command.getAdditionalFee() != null)
-            entity.changeAdditionalFee(Money.of(command.getAdditionalFee()));
+            entity.changeAdditionalFee(command.getAdditionalFee());
 
         if (command.getAdditionalTime() != null)
-            entity.changeAdditionalTime(DurationTime.of(command.getAdditionalTime()));
+            entity.changeAdditionalTime(command.getAdditionalTime());
     }
 }
