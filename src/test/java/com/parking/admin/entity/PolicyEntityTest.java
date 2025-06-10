@@ -1,59 +1,63 @@
 package com.parking.admin.entity;
 
-import com.parking.admin.application.command.CreatePolicyCommand;
-import com.parking.admin.application.command.UpdatePolicyCommand;
 import com.parking.admin.application.mapper.PolicyMapper;
+import com.parking.admin.application.port.in.PolicyUseCase;
+import com.parking.admin.domain.common.Money;
+import com.parking.admin.domain.common.exception.BusinessLogicException;
+import com.parking.admin.domain.policy.DurationTime;
 import com.parking.admin.domain.policy.PolicyEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class PolicyEntityTest {
-    
-    @Autowired
+
+    @InjectMocks
     private PolicyMapper policyMapper;
 
     @Test
     @DisplayName("주차 정책 생성 시 모든 필드가 정상적으로 설정된다")
     void createPolicy() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
 
         // when
-        PolicyEntity policy = policyMapper.toEntity(command);
+        PolicyEntity actual = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
 
         // then
-        assertEquals(1000L, policy.getBaseFee().getAmount());
-        assertEquals(30L, policy.getFreeTime().getDuration());
-        assertEquals(500L, policy.getAdditionalFee().getAmount());
-        assertEquals(10L, policy.getAdditionalTime().getDuration());
+        assertEquals(1000L, actual.getBaseFee().getAmount());
+        assertEquals(30L, actual.getFreeTime().getDuration());
+        assertEquals(500L, actual.getAdditionalFee().getAmount());
+        assertEquals(10L, actual.getAdditionalTime().getDuration());
     }
 
     @Test
     @DisplayName("기본 요금을 변경할 수 있다")
     void changeBaseFee() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
-
-        PolicyEntity policy = policyMapper.toEntity(command);
-        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
-                .baseFee(2000L)
-                .build();
+        PolicyEntity policy = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
+        PolicyUseCase.UpdatePolicyCommand updateCommand =
+                new PolicyUseCase.UpdatePolicyCommand(
+                        Money.of(2000L),
+                        null,
+                        null,
+                        null
+                );
 
         // when
         policyMapper.change(updateCommand, policy);
@@ -66,20 +70,15 @@ class PolicyEntityTest {
     @DisplayName("기본 시간을 변경할 수 있다")
     void changeFreeTime() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
-
-        PolicyEntity policy = policyMapper.toEntity(command);
-        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
-                .freeTime(60L)
-                .build();
+        PolicyEntity policy = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
 
         // when
-        policyMapper.change(updateCommand, policy);
+        policy.changeFreeTime(DurationTime.of(60L));
 
         // then
         assertEquals(60L, policy.getFreeTime().getDuration());
@@ -89,17 +88,20 @@ class PolicyEntityTest {
     @DisplayName("추가 요금을 변경할 수 있다")
     void changeAdditionalFee() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
+        PolicyEntity policy = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
 
-        PolicyEntity policy = policyMapper.toEntity(command);
-        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
-                .additionalFee(1000L)
-                .build();
+        PolicyUseCase.UpdatePolicyCommand updateCommand =
+                new PolicyUseCase.UpdatePolicyCommand(
+                        null,
+                        null,
+                        Money.of(1000L),
+                        null
+                );
 
         // when
         policyMapper.change(updateCommand, policy);
@@ -112,20 +114,15 @@ class PolicyEntityTest {
     @DisplayName("추가 시간을 변경할 수 있다")
     void changeAdditionalTime() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
-
-        PolicyEntity policy = policyMapper.toEntity(command);
-        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
-                .additionalTime(20L)
-                .build();
+        PolicyEntity policy = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
 
         // when
-        policyMapper.change(updateCommand, policy);
+        policy.changeAdditionalTime(DurationTime.of(20L));
 
         // then
         assertEquals(20L, policy.getAdditionalTime().getDuration());
@@ -134,36 +131,28 @@ class PolicyEntityTest {
     @Test
     @DisplayName("추가 시간이 1분 미만일 경우 예외가 발생한다")
     void validateAdditionalTime() {
-        
-        // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(0L)
-                .build();
-
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> policyMapper.toEntity(command));
+        assertThrows(BusinessLogicException.class,
+                () -> new PolicyEntity(
+                        Money.of(1000L),
+                        DurationTime.of(30L),
+                        Money.of(500L),
+                        DurationTime.of(0L)
+                ));
     }
 
     @Test
     @DisplayName("추가 시간을 1분 미만으로 변경할 경우 예외가 발생한다")
     void validateChangeAdditionalTime() {
         // given
-        CreatePolicyCommand command = CreatePolicyCommand.builder()
-                .baseFee(1000L)
-                .freeTime(30L)
-                .additionalFee(500L)
-                .additionalTime(10L)
-                .build();
-
-        PolicyEntity policy = policyMapper.toEntity(command);
-        UpdatePolicyCommand updateCommand = UpdatePolicyCommand.builder()
-                .additionalTime(0L)
-                .build();
+        PolicyEntity policy = new PolicyEntity(
+                Money.of(1000L),
+                DurationTime.of(30L),
+                Money.of(500L),
+                DurationTime.of(10L)
+        );
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> policyMapper.change(updateCommand, policy));
+        assertThrows(BusinessLogicException.class, () -> policy.changeAdditionalTime(DurationTime.of(0L)));
     }
 }

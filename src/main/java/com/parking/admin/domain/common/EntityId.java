@@ -1,13 +1,13 @@
 package com.parking.admin.domain.common;
 
-import lombok.Getter;
+import lombok.Value;
 
 import java.util.UUID;
 
-@Getter
-public final class EntityId {
-    private final String value;
-    private final IdType originalType;
+@Value
+public class EntityId {
+    String value;
+    IdType originalType;
 
     private EntityId(String value, IdType originalType) {
         this.value = value;
@@ -47,19 +47,4 @@ public final class EntityId {
     public enum IdType{
         LONG,UUID,STRING
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EntityId domainId = (EntityId) o;
-        return value.equals(domainId.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
 }
