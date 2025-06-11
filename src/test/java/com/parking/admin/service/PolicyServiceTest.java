@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -21,14 +20,13 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @TestPropertySource
         (properties = //값 설정할때 주소는 따옴표 때고 쓸것 "\".."\" 이런식 말고 아래처럼
-                {"api.item-management.policy.get=/api/vehicles/search",
-                        "api.item-management.policy.update=/api/parking-fees",
-                        "api.base-url=http://localhost:${wiremock.server.port}"}
+                {"api.item-management.policy.read-policy = /api/parking-fees/policy",
+                        "api.item-management.policy.update-policy=/api/parking-fees"
+                }
         )
-public class PolicyServiceTest {
+class PolicyServiceTest {
 
     @Autowired
     PolicyUseCase policyUseCase;
@@ -56,7 +54,7 @@ public class PolicyServiceTest {
         String updatedPolicyJson
                 = "{\"baseFee\": 1000,\"freeTime\": 30, \"additionalFee\": 1000,\"additionalTime\": 10}";
 
-        wireMockServer.stubFor(WireMock.get("/api/vehicles/search")
+        wireMockServer.stubFor(WireMock.get("/api/parking-fees/policy")
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
@@ -93,7 +91,7 @@ public class PolicyServiceTest {
         String currentPolicyJson =
                 "{\"baseFee\": 1000,\"freeTime\": 30, \"additionalFee\": 500,\"additionalTime\": 10}";
 
-        wireMockServer.stubFor(WireMock.get("/api/vehicles/search")
+        wireMockServer.stubFor(WireMock.get("/api/parking-fees/policy")
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)

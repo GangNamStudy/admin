@@ -23,10 +23,10 @@ public class PolicyAdapter implements PolicyPort {
     private final ExternalPolicyMapper mapper;
     private final WebClient webClient;
 
-    @Value("${api.item-management.policy.get}")
+    @Value("${api.item-management.policy.read-policy}")
     private String getUrl;
 
-    @Value("${api.item-management.policy.patch}")
+    @Value("${api.item-management.policy.update-policy}")
     private String patchUrl;
 
     @Override

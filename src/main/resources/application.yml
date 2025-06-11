@@ -26,5 +26,13 @@ api:
   base-url: "http://localhost:8080"
   item-management:
     policy:
-      get: "/api/vehicles/search"
-      patch: "/api/parking-fees"
+      read-policy: "/api/parking-fees/policy"
+      update-policy: "/api/parking-fees"
+
+  parking-management:
+    parking:
+      entry-car: "/api/vehicles/"
+      exit-car: "/api/vehicles/exit/{plate}"
+      load-car:
+        id: "/api/vehicles/id/{id}"
+        plate: "/api/vehicles/plate/{numberplate}"
