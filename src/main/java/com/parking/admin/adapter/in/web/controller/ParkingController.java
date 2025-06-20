@@ -8,7 +8,6 @@ import com.parking.admin.application.port.in.ParkingUseCase;
 import com.parking.admin.domain.parking.ParkingInfo;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
