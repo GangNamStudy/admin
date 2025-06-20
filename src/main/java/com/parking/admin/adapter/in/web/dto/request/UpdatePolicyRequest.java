@@ -10,7 +10,7 @@ import lombok.Getter;
 @Builder
 public class UpdatePolicyRequest {
     private Long baseFee;
-    private Long feeTime;
+    private Long freeTime;
     private Long additionalFee;
     private Long additionalTime;
 }

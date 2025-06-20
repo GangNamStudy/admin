@@ -1,7 +1,5 @@
 package com.parking.admin.entity;
 
-import com.parking.admin.application.command.CreatePaymentCommand;
-import com.parking.admin.application.mapper.PaymentMapper;
 import com.parking.admin.domain.common.EntityId;
 import com.parking.admin.domain.common.Money;
 import com.parking.admin.domain.payment.PaymentEntity;
@@ -22,31 +20,36 @@ class PaymentEntityTest {
     @DisplayName("PaymentEntity 생성")
     void createPaymentEntity_ShouldCreateEntityWithCorrectValues() {
         // Given
-        CreatePaymentCommand command = CreatePaymentCommand.builder()
-                .paymentId(1L)
-                .identifier("TEST-001")
-                .amount(10000L)
-                .paymentDate(LocalDateTime.now())
-                .status("SUCCESS")
-                .orderName("Test Order")
-                .paymentMethod("CARD")
-                .receiptUrl("http://receipt.url")
-                .build();
-
-        PaymentMapper mapper = new PaymentMapper();
+        LocalDateTime now = LocalDateTime.now();
+        EntityId paymentId = EntityId.of(1L);
+        String identifier = "TEST-001";
+        Money amount = Money.of(10000L);
+        PaymentStatus status = PaymentStatus.of("SUCCESS");
+        String orderName = "Test Order";
+        String paymentMethod = "CARD";
+        String receiptUrl = "http://receipt.url";
 
         // When
-        PaymentEntity entity = mapper.toEntity(command);
+        PaymentEntity entity = new PaymentEntity(
+                paymentId,
+                identifier,
+                amount,
+                now,
+                status,
+                orderName,
+                paymentMethod,
+                receiptUrl
+        );
 
         // Then
-        assertThat(entity.getPaymentId()).isEqualTo(EntityId.of(command.getPaymentId()));
-        assertThat(entity.getIdentifier()).isEqualTo(command.getIdentifier());
-        assertThat(entity.getAmount()).isEqualTo(Money.of(command.getAmount()));
-        assertThat(entity.getPaymentDate()).isEqualTo(command.getPaymentDate());
-        assertThat(entity.getStatus()).isEqualTo(PaymentStatus.of(command.getStatus()));
+        assertThat(entity.getPaymentId()).isEqualTo(paymentId);
+        assertThat(entity.getIdentifier()).isEqualTo(identifier);
+        assertThat(entity.getAmount()).isEqualTo(amount);
+        assertThat(entity.getPaymentDate()).isEqualTo(now);
+        assertThat(entity.getStatus()).isEqualTo(status);
         assertThat(entity.getStatus().getDisplayName()).isEqualTo("결제 성공");
-        assertThat(entity.getOrderName()).isEqualTo(command.getOrderName());
-        assertThat(entity.getPaymentMethod()).isEqualTo(command.getPaymentMethod());
-        assertThat(entity.getReceiptUrl()).isEqualTo(command.getReceiptUrl());
+        assertThat(entity.getOrderName()).isEqualTo(orderName);
+        assertThat(entity.getPaymentMethod()).isEqualTo(paymentMethod);
+        assertThat(entity.getReceiptUrl()).isEqualTo(receiptUrl);
     }
 }

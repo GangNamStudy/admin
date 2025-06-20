@@ -2,7 +2,7 @@ package com.parking.admin.adapter.out.parking;
 
 import com.parking.admin.adapter.out.parking.dto.ExternalEntryAndExitRequest;
 import com.parking.admin.adapter.out.parking.dto.ExternalEntryAndExitResponse;
-import com.parking.admin.adapter.out.parking.dto.ExternalReadCarInfoRequest;
+import com.parking.admin.adapter.out.parking.dto.ExternalReadCarInfoResponse;
 import com.parking.admin.application.port.in.ParkingUseCase;
 import com.parking.admin.domain.common.EntityId;
 import com.parking.admin.domain.parking.ParkingInfo;
@@ -26,7 +26,14 @@ public class ExternalParkingMapper {
                 entity.getEntryTime()
         );
     }
-
+    public ParkingInfo toInfo(ExternalReadCarInfoResponse response){
+        return new ParkingInfo(
+                response.getPlate(),
+                response.getEntryTime(),
+                response.getExitTime(),
+                response.isParked()
+        );
+    }
 
     public ParkingInfo entryToInfo(ExternalEntryAndExitResponse response){
         return new ParkingInfo(
@@ -45,7 +52,7 @@ public class ExternalParkingMapper {
         );
     }
 
-    public ParkingSessionEntity toEntity(ExternalReadCarInfoRequest response){
+    public ParkingSessionEntity toEntity(ExternalReadCarInfoResponse response){
         return new ParkingSessionEntity(
                 EntityId.of(response.getId()),
                 response.getPlate(),

@@ -21,18 +21,18 @@ import java.util.Objects;
 public class PolicyAdapter implements PolicyPort {
 
     private final ExternalPolicyMapper mapper;
-    private final WebClient webClient;
+    private final WebClient itemManagementWebClient;
 
     @Value("${api.item-management.policy.read-policy}")
     private String getUrl;
 
     @Value("${api.item-management.policy.update-policy}")
-    private String patchUrl;
+    private String putUrl;
 
     @Override
     public PolicyEntity load() {
 
-        ExternalReadPolicyResponse dto = webClient
+        ExternalReadPolicyResponse dto = itemManagementWebClient
                 .get()
                 .uri(getUrl)
                 .retrieve()
@@ -47,9 +47,9 @@ public class PolicyAdapter implements PolicyPort {
     public PolicyInfo save(PolicyEntity entity) {
         ExternalUpdatePolicyRequest request = mapper.toUpdateRequest(entity);
 
-        ExternalReadPolicyResponse response =  webClient
-                .patch()
-                .uri(patchUrl)
+        ExternalReadPolicyResponse response =  itemManagementWebClient
+                .put()
+                .uri(putUrl)
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(ExternalReadPolicyResponse.class)
