@@ -8,13 +8,33 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    @Value("${api.base-url}")
-    private String url;
+    @Value("${api.payment.base-url}")
+    private String paymentUrl;
+
+    @Value("${api.item-management.base-url}")
+    private String itemManagementUrl;
+
+    @Value("${api.parking-management.base-url}")
+    private String parkingManagementUrl;
 
     @Bean
-    public WebClient webClient() {
+    public WebClient paymentWebClient() {
         return WebClient.builder()
-                .baseUrl(url)  // 필요한 경우 base URL 설정
+                .baseUrl(paymentUrl)
+                .build();
+    }
+
+    @Bean
+    public WebClient itemManagementWebClient() {
+        return WebClient.builder()
+                .baseUrl(itemManagementUrl)
+                .build();
+    }
+
+    @Bean
+    public WebClient parkingManagementWebClient() {
+        return WebClient.builder()
+                .baseUrl(parkingManagementUrl)
                 .build();
     }
 }

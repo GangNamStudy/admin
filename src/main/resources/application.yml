@@ -2,6 +2,9 @@ spring:
   application:
     name: admin
 
+server:
+  port: 8081
+
 spring-doc:
   packages-to-scan: com.parking.admin.adapter.in.web
   swagger-ui:
@@ -14,25 +17,25 @@ spring-doc:
   default-consumes-media-type: application/json
   default-produces-media-type: application/json
 
-security:
-  whitelist:
-    /swagger-ui/**,
-    /v3/api-docs/**,
-    /swagger-ui.html,
-    /swagger-ui/index.html,
-    /api-docs/**
-
 api:
-  base-url: "http://localhost:8080"
   item-management:
+    base-url: "http://192.168.0.8:8080"
     policy:
-      read-policy: "/api/parking-fees/policy"
-      update-policy: "/api/parking-fees"
+      read-policy: "/api/parking-fee"
+      update-policy: "/api/parking-fee/policy"
 
   parking-management:
+    base-url: "http://192.168.0.21:8080"
     parking:
       entry-car: "/api/vehicles/"
       exit-car: "/api/vehicles/exit/{plate}"
       load-car:
         id: "/api/vehicles/id/{id}"
         plate: "/api/vehicles/plate/{numberplate}"
+        history: "/api/vehicles/search"
+
+  payment:
+    base-url: "http://192.168.0.36:8080"
+    read:
+      id: "/api/v1/payment/{paymentId}"
+      history: "/api/v1/payment"

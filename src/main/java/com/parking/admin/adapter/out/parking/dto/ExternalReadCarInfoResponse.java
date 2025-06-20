@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ExternalReadCarInfoRequest {
+public class ExternalReadCarInfoResponse {
     private final Long id;
     private final String plate;
     private final LocalDateTime entryTime;
     private LocalDateTime exitTime;
-    private boolean isParked;
+    private boolean parked;
 }

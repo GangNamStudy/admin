@@ -1,0 +1,195 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+            rel="stylesheet"
+            as="style"
+            onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body>
+<div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+            <div class="layout-content-container flex flex-col w-80">
+                <div class="flex h-full min-h-[700px] flex-col justify-between bg-slate-50 p-4">
+                    <div class="flex flex-col gap-4">
+                        <h1 class="text-[#0d141c] text-base font-medium leading-normal">주차장 관리</h1>
+                        <div class="flex flex-col gap-2">
+                            <a href="/">
+                                <button class="flex items-center gap-3 px-3 py-2">
+                                    <div class="text-[#0d141c]" data-icon="MagnifyingGlass" data-size="24px" data-weight="fill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M168,112a56,56,0,1,1-56-56A56,56,0,0,1,168,112Zm61.66,117.66a8,8,0,0,1-11.32,0l-50.06-50.07a88,88,0,1,1,11.32-11.31l50.06,50.06A8,8,0,0,1,229.66,229.66ZM112,184a72,72,0,1,0-72-72A72.08,72.08,0,0,0,112,184Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">가격 정책 조회</p>
+                                </button>
+                            </a>
+                            <a href="/update-policy">
+                                <button class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#e7edf4]">
+                                    <div class="text-[#0d141c]" data-icon="PencilSimple" data-size="24px" data-weight="regular">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">가격 정책 수정</p>
+                                </button>
+                            </a>
+                            <a href="/parking-info">
+                                <button class="flex items-center gap-3 px-3 py-2">
+                                    <div class="text-[#0d141c]" data-icon="Car" data-size="24px" data-weight="regular">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M240,112H229.2L201.42,49.5A16,16,0,0,0,186.8,40H69.2a16,16,0,0,0-14.62,9.5L26.8,112H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V192h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V128h8a8,8,0,0,0,0-16ZM69.2,56H186.8l24.89,56H44.31ZM64,208H40V192H64Zm128,0V192h24v16Zm24-32H40V128H216ZM56,152a8,8,0,0,1,8-8H80a8,8,0,0,1,0,16H64A8,8,0,0,1,56,152Zm112,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,152Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">차량 기록 조회</p>
+                                </button>
+                            </a>
+                            <a href="/revenue">
+                                <button class="flex items-center gap-3 px-3 py-2">
+                                    <div class="text-[#0d141c]" data-icon="CurrencyCircleDollar" data-size="24px" data-weight="regular">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">월 별 총합 매출 조회</p>
+                                </button>
+                            </a>
+                            <a href="/entrance">
+                                <button class="flex items-center gap-3 px-3 py-2">
+                                    <div class="text-[#0d141c]" data-icon="SignIn" data-size="24px" data-weight="regular">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M141.66,133.66l-40,40a8,8,0,0,1-11.32-11.32L116.69,136H24a8,8,0,0,1,0-16h92.69L90.34,93.66a8,8,0,0,1,11.32-11.32l40,40A8,8,0,0,1,141.66,133.66ZM192,32H136a8,8,0,0,0,0,16h56V208H136a8,8,0,0,0,0,16h56a16,16,0,0,0,16-16V48A16,16,0,0,0,192,32Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">입차 처리</p>
+                                </button>
+                            </a>
+                            <a href="/exit">
+                                <button class="flex items-center gap-3 px-3 py-2">
+                                    <div class="text-[#0d141c]" data-icon="SignOut" data-size="24px" data-weight="regular">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                            <path
+                                                    d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-[#0d141c] text-sm font-medium leading-normal">출차 처리</p>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                <div class="flex flex-wrap justify-between gap-3 p-4">
+                    <div class="flex min-w-72 flex-col gap-3">
+                        <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight">가격 정책 수정</p>
+                        <p class="text-[#49749c] text-sm font-normal leading-normal">주차 시설의 현재 가격 정책을 확인하고 수정합니다.</p>
+                    </div>
+                </div>
+                <h3 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">현재 가격 정책</h3>
+                <div class="px-4 py-3 @container">
+                    <div class="flex overflow-hidden rounded-xl border border-[#cedce8] bg-slate-50">
+                        <table class="flex-1">
+                            <thead>
+                            <tr class="bg-slate-50">
+                                <th class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-120 px-4 py-3 text-left text-[#0d151c] w-[400px] text-sm font-medium leading-normal">
+                                    기본 시간
+                                </th>
+                                <th class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-240 px-4 py-3 text-left text-[#0d151c] w-[400px] text-sm font-medium leading-normal">기본 요금</th>
+                                <th class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-360 px-4 py-3 text-left text-[#0d151c] w-[400px] text-sm font-medium leading-normal">추가 시간</th>
+                                <th class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-480 px-4 py-3 text-left text-[#0d151c] w-[400px] text-sm font-medium leading-normal">추가 요금</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="border-t border-t-[#cedce8]">
+                                <td id="baseTime" class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d151c] text-sm font-normal leading-normal">
+                                    최초 30분
+                                </td>
+                                <td id="baseFee" class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49749c] text-sm font-normal leading-normal">
+                                    1000 원
+                                </td>
+                                <td id="additionalTime" class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49749c] text-sm font-normal leading-normal">10분 당</td>
+                                <td id="additionalFee" class="table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49749c] text-sm font-normal leading-normal">2000 원</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <style>
+                        @container(max-width:120px){.table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-120{display: none;}}
+                        @container(max-width:240px){.table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-240{display: none;}}
+                        @container(max-width:360px){.table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-360{display: none;}}
+                        @container(max-width:480px){.table-edeabc8f-2c74-4353-a04c-bd54a54fae9a-column-480{display: none;}}
+                    </style>
+                </div>
+                <h3 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">가격 정책 수정</h3>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                    <label class="flex flex-col min-w-40 flex-1">
+                        <p class="text-[#0d151c] text-base font-medium leading-normal pb-2">기본 시간 (분)</p>
+                        <input id="updateBaseTime" type="number"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                                value=""
+                        />
+                    </label>
+                </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                    <label class="flex flex-col min-w-40 flex-1">
+                        <p class="text-[#0d151c] text-base font-medium leading-normal pb-2">기본 요금 (원)</p>
+                        <input id="updateBaseFee" type="number"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                                value=""
+                        />
+                    </label>
+                </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                    <label class="flex flex-col min-w-40 flex-1">
+                        <p class="text-[#0d151c] text-base font-medium leading-normal pb-2">추가 시간 (분)</p>
+                        <input id="updateAdditionalTime" type="number"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                                value=""
+                        />
+                    </label>
+                </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                    <label class="flex flex-col min-w-40 flex-1">
+                        <p class="text-[#0d151c] text-base font-medium leading-normal pb-2">추가 요금 (원)</p>
+                        <input id="updateAdditionalFee" type="number"
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                                value=""
+                        />
+                    </label>
+                </div>
+                <div class="flex px-4 py-3 justify-end">
+                    <button
+                            id="sendBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#0b80ee] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                    >
+                        <span class="truncate">정책 업데이트</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/readPolicy.js"></script>
+<script src="/updatePolicy.js"></script>
+</body>
+</html>

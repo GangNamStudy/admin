@@ -66,65 +66,22 @@
     ]
   }
   ```
-
-### **1.3 주차 요금 정책 활성화** (PATCH)
-
-- **URL**: `/api/admin/policy/{policy-id}/activate`
-- **Body Parameters**:
-  - `id` (string): 정책 ID
-  - `policy_status` (enum: `activate`)
-- **설명**: 특정 주차 요금 정책을 활성화합니다.
-- **예제 cURL 요청**:
-  ```bash
-  curl -X PATCH "http://localhost:8080/api/admin/policy/123/activate" \
-  -H "Content-Type: application/json" \
-  -d '{"id": "123", "policy_status": "activate"}'
-  ```
-- **예제 응답**:
-  ```json
-  {
-    "id": "123",
-    "policy_status": "activate"
-  }
-  ```
-
-### **1.4 주차 요금 정책 비활성화** (PATCH)
-
-- **URL**: `/api/admin/policy/{policy-id}/deactivate`
-- **Body Parameters**:
-  - `id` (string): 정책 ID
-  - `policy_status` (enum: `deactivate`)
-- **설명**: 특정 주차 요금 정책을 비활성화합니다.
-- **예제 cURL 요청**:
-  ```bash
-  curl -X PATCH "http://localhost:8080/api/admin/policy/124/deactivate" \
-  -H "Content-Type: application/json" \
-  -d '{"id": "124", "policy_status": "deactivate"}'
-  ```
-- **예제 응답**:
-  ```json
-  {
-    "id": "124",
-    "policy_status": "deactivate"
-  }
-  ```
-
+  
 ---
 
 ## **2. 차량 입출차 관리**
 
-### **2.1 입출차 및 결제 정보 조회** (GET)
+### **2.1 입,출차 정보 조회** (GET)
 
-- **URL**: `/api/admin/management`
+- **URL**: `/api/admin/management/history`
 - **Query Parameters (optional)**:
-  - `car-id` (string, optional): 특정 차량 번호로 검색
-  - `period` (object, optional): 특정 기간 검색
-    - `start_time` (string, ISO 8601 format)
-    - `end_time` (string, ISO 8601 format)
+  - `plate` (string, optional): 특정 차량 번호로 검색
+  - `startDate` (string, ISO 8601 format)
+  - `endDate` (string, ISO 8601 format)
 - **설명**: 차량 입출차 정보와 결제 데이터를 통합 조회합니다.
 - **예제 cURL 요청**:
   ```bash
-  curl -X GET "http://localhost:8080/api/admin/management?car-id=89거 9821&period[start_time]=2025-11-08T11:44&period[end_time]=2025-11-08T13:44" \
+  curl -X GET "http://localhost:8080/api/admin/management?car-id=89거 9821&startDate=2025-11-08&endDate=2025-11-08" \
   -H "Content-Type: application/json"
   ```
 - **예제 응답**:
@@ -132,11 +89,9 @@
   {
     "result": [
       {
-        "car_id": "89거 9821",
-        "fee": 2000,
+        "plate": "89거 9821",
         "entry_time": "2025-11-08T11:44:30",
-        "exit_time": "2025-11-08T14:44:30",
-        "payment_method": "credit_card"
+        "exit_time": "2025-11-08T14:44:30"
       }
     ]
   }
@@ -182,6 +137,36 @@
     "entry_time": "2025-11-08T14:44:30",
     "exit_time": "2025-11-08T14:44:31",
     "car_status": "exit"
+  }
+  ```
+
+---
+
+## **3. 매출 관리 **
+
+### **3.1 기간 별 매출 조회** (GET)
+
+- **URL**: `/api/admin/payment`
+- **Query Parameters (optional)**:
+  - `startTime` (string, ISO 8601 format)
+  - `endTime` (string, ISO 8601 format)
+- **설명**: 일정 기간동안 벌어들인 매출의 총 합을 조회합니다.
+- **예제 cURL 요청**:
+  ```bash
+  curl -X GET "http://localhost:8080/api/admin/management?startTime=2025-11-08T11:44&endTime=2025-11-08T13:44" \
+  -H "Content-Type: application/json"
+  ```
+- **예제 응답**:
+  ```json
+  {
+    "totalAmount": 1200000,
+  
+    "days" : [
+      {
+        "date" : 12,
+        "dayFee" : 21000
+      }
+    ]
   }
   ```
 
